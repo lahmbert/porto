@@ -1,0 +1,109 @@
+Buatkan project Next.js dengan struktur seperti ini:
+
+/my-portfolio/
+├── app/
+│   ├── layout.js
+│   ├── page.js
+│   ├── projects/
+│   │   └── page.js
+│   ├── about/
+│   │   └── page.js
+├── components/
+│   ├── Navbar.js
+│   ├── Footer.js
+│   ├── ProjectCard.js
+├── public/
+│   └── profile.jpg (dummy file)
+├── styles/
+│   └── globals.css
+├── tailwind.config.js
+├── next.config.mjs
+├── package.json
+└── README.md
+
+Instal Tailwind CSS dan setup sesuai dokumentasi resminya.
+
+Lalu isi beberapa file berikut dengan kode ini:
+
+--- app/layout.js ---
+export const metadata = {
+  title: 'Muhammad Sabran | Portfolio',
+  description: 'Fullstack Developer Portfolio',
+};
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body className="bg-gray-100 text-gray-900">
+        <main className="max-w-5xl mx-auto px-4">
+          {children}
+        </main>
+      </body>
+    </html>
+  );
+}
+
+--- app/page.js ---
+import Link from 'next/link';
+export default function HomePage() {
+  return (
+    <section className="py-16">
+      <h1 className="text-4xl font-bold mb-4">Hi, I'm Muhammad Sabran</h1>
+      <p className="text-lg mb-6">
+        A Full Stack Developer with experience in React, Laravel, Golang, and more.
+      </p>
+      <Link href="/projects" className="text-blue-600 underline">
+        See My Projects
+      </Link>
+    </section>
+  );
+}
+
+--- app/projects/page.js ---
+import ProjectCard from '@/components/ProjectCard';
+const projects = [
+  {
+    title: 'Garasi Bincang Coffee',
+    github: 'https://github.com/lahmbert/ecommercev03',
+    live: 'https://garasi-bincang-coffee.vercel.app/',
+    description: 'E-commerce app built with Next.js and Tailwind CSS.',
+  },
+  {
+    title: 'Quiz Assignment App',
+    github: 'https://github.com/lahmbert/Quiz-Assignment-Fix',
+    live: 'https://quiz-assignment-fix.vercel.app/',
+    description: 'Quiz platform with multilingual support and Supabase backend.',
+  }
+];
+export default function ProjectsPage() {
+  return (
+    <div className="py-10">
+      <h2 className="text-3xl font-bold mb-6">Projects</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {projects.map((proj, i) => (
+          <ProjectCard key={i} {...proj} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+--- components/ProjectCard.js ---
+export default function ProjectCard({ title, github, live, description }) {
+  return (
+    <div className="p-4 border rounded-xl shadow-sm bg-white hover:shadow-md transition">
+      <h3 className="text-xl font-semibold">{title}</h3>
+      <p className="text-sm my-2">{description}</p>
+      <div className="flex gap-4 text-sm">
+        <a href={github} target="_blank" className="text-blue-600 underline">GitHub</a>
+        {live && <a href={live} target="_blank" className="text-green-600 underline">Live Demo</a>}
+      </div>
+    </div>
+  );
+}
+
+Instal Tailwind CSS dan isi `styles/globals.css` dengan:
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+Edit tailwind.config.js agar `content` memuat './app/**/*.{js,ts,jsx,tsx}' dan './components/**/*.{js,ts,jsx,tsx}'
