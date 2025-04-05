@@ -49,7 +49,7 @@ const projects = [
   {
     title: 'Portfolio Website',
     github: 'https://github.com/lahmbert/portfolio',
-    live: 'https://muhammadsabran.vercel.app/',
+    live: 'https://bran-porto.vercel.app/projects',
     description: 'Personal portfolio website built with Next.js and custom CSS. Features responsive design and showcases my projects and skills.',
     stack: 'Next.js, CSS'
   }
